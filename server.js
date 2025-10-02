@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const employeeRoutes = require('./routes/employeeRoutes')
+const departmentRoutes = require('./routes/departmentRoutes')
 const auth = require('./middleware/auth')
 
 const app = express()
@@ -8,6 +9,7 @@ app.use(express.json())
 
 // API Routes
 app.use('/api/v1/employees', auth, employeeRoutes)
+app.use('/api/v1/departments', auth, departmentRoutes)
 app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(err.statusCode || 500).json({
