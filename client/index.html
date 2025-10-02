@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="EmployeeApp">
+  <head>
+    <title>Employee Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="services/employeeService.js"></script>
+    <script src="controllers/employeeController.js"></script>
+  </head>
+  <body>
+    <h1>Employee Management</h1>
+    <a href="#!/employees">Daftar Karyawan</a> |
+    <a href="#!/employees/new">Tambah Karyawan</a>
+    <div ng-view></div>
+  </body>
+</html>

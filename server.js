@@ -1,10 +1,12 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const employeeRoutes = require('./routes/employeeRoutes')
 const departmentRoutes = require('./routes/departmentRoutes')
 const auth = require('./middleware/auth')
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 
 // API Routes
