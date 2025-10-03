@@ -1,5 +1,5 @@
 app.factory('EmployeeService', function ($http) {
-  const API_URL = 'http://localhost:3000/api/v1/employees'
+  const API_URL = `${window.env.API_URL}/employees`
   const HEADERS = { headers: { 'x-api-key': window.env.API_KEY } }
 
   function toPayload(emp) {
@@ -36,7 +36,7 @@ app.factory('EmployeeService', function ($http) {
 })
 
 app.factory('DepartmentService', function ($http) {
-  const API_URL = 'http://localhost:3000/api/v1/departments'
+  const API_URL = `${window.env.API_URL}/departments`
   const HEADERS = { headers: { 'x-api-key': window.env.API_KEY } }
 
   return {
