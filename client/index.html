@@ -15,10 +15,22 @@
     <script src="services/employeeService.js"></script>
     <script src="controllers/employeeController.js"></script>
   </head>
-  <body>
-    <h1>Employee Management</h1>
-    <a href="#!/employees">Daftar Karyawan</a> |
-    <a href="#!/employees/new">Tambah Karyawan</a>
-    <div ng-view></div>
+  <body class="bg-light">
+    <div class="container py-4">
+      <h1 class="text-center mb-4">Employee Management</h1>
+
+      <nav class="mb-4 text-center">
+        <a href="#!/employees" class="btn btn-primary me-2">Daftar Karyawan</a>
+        <a href="#!/employees/new" class="btn btn-success">Tambah Karyawan</a>
+      </nav>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div ng-view></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

@@ -1,40 +1,85 @@
-<h2>Daftar Karyawan</h2>
+<h2 class="mb-3">Daftar Karyawan</h2>
 
-<input type="text" ng-model="searchText" placeholder="Cari nama karyawan..." />
+<!-- Alert Success / Error -->
+<div
+  ng-if="alert.message"
+  class="alert"
+  ng-class="{'alert-success': alert.type==='success', 'alert-danger': alert.type==='error'}"
+>
+  {{alert.message}}
+</div>
 
-<table border="1" width="100%">
-  <tr>
-    <th>ID</th>
-    <th>Nama</th>
-    <th>Jabatan</th>
-    <th>Gaji</th>
-    <th>Departemen</th>
-    <th>Aksi</th>
-  </tr>
-  <tr ng-repeat="emp in employees | filter:{Name: searchText}">
-    <td>{{emp.EmployeeID}}</td>
-    <td>{{emp.Name}}</td>
-    <td>{{emp.Position}}</td>
-    <td>{{emp.Salary}}</td>
-    <td>{{emp.DepartmentName}}</td>
-    <td>
-      <a href="#!/employees/edit/{{emp.EmployeeID}}">Edit</a>
-      <button ng-click="deleteEmployee(emp.EmployeeID)">Delete</button>
-    </td>
-  </tr>
+<!-- Loading Spinner -->
+<div ng-if="loading" class="text-center my-3">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="input-group mb-3">
+  <span class="input-group-text">🔍</span>
+  <input
+    type="text"
+    class="form-control"
+    ng-model="searchText"
+    placeholder="Cari nama karyawan..."
+  />
+</div>
+
+<!-- Table -->
+<table class="table table-bordered table-striped align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Nama</th>
+      <th>Jabatan</th>
+      <th>Gaji</th>
+      <th>Departemen</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="emp in employees | filter:{Name: searchText}">
+      <td>{{emp.EmployeeID}}</td>
+      <td>{{emp.Name}}</td>
+      <td>{{emp.Position}}</td>
+      <td>Rp {{emp.Salary | number:0}}</td>
+      <td>{{emp.DepartmentName}}</td>
+      <td>
+        <a
+          href="#!/employees/edit/{{emp.EmployeeID}}"
+          class="btn btn-sm btn-warning me-2"
+          >Edit</a
+        >
+        <button
+          class="btn btn-sm btn-danger"
+          ng-click="deleteEmployee(emp.EmployeeID)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+    <tr ng-if="employees.length === 0 && !loading">
+      <td colspan="6" class="text-center">Tidak ada data karyawan</td>
+    </tr>
+  </tbody>
 </table>
 
-<div>
+<!-- Pagination -->
+<div class="d-flex justify-content-between align-items-center mt-3">
   <button
+    class="btn btn-outline-primary"
     ng-disabled="pagination.page <= 1"
     ng-click="loadEmployees(pagination.page - 1)"
   >
     Prev
   </button>
 
-  Page {{pagination.page}} of {{pagination.totalPage}}
+  <span>Page {{pagination.page}} of {{pagination.totalPage}}</span>
 
   <button
+    class="btn btn-outline-primary"
     ng-disabled="pagination.page >= pagination.totalPage"
     ng-click="loadEmployees(pagination.page + 1)"
   >

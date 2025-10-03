@@ -1,22 +1,38 @@
-<h2>Edit Karyawan</h2>
-<form ng-submit="updateEmployee()">
-  <label>Nama:</label>
-  <input type="text" ng-model="employee.Name" required /><br />
+<h2 class="mb-3">Edit Karyawan</h2>
+<form ng-submit="updateEmployee()" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Nama</label>
+    <input type="text" class="form-control" ng-model="employee.Name" required />
+  </div>
 
-  <label>Jabatan:</label>
-  <input type="text" ng-model="employee.Position" /><br />
+  <div class="col-md-6">
+    <label class="form-label">Jabatan</label>
+    <input type="text" class="form-control" ng-model="employee.Position" />
+  </div>
 
-  <label>Gaji:</label>
-  <input type="number" ng-model="employee.Salary" required /><br />
+  <div class="col-md-6">
+    <label class="form-label">Gaji</label>
+    <input
+      type="number"
+      class="form-control"
+      ng-model="employee.Salary"
+      required
+    />
+  </div>
 
-  <label>Departemen:</label>
-  <select
-    ng-model="employee.DepartmentID"
-    ng-options="d.DepartmentID as d.DepartmentName for d in departments"
-    required
-  >
-    <option value="">-- Pilih Departemen --</option></select
-  ><br />
+  <div class="col-md-6">
+    <label class="form-label">Departemen</label>
+    <select
+      class="form-select"
+      ng-model="employee.DepartmentID"
+      ng-options="d.DepartmentID as d.DepartmentName for d in departments"
+      required
+    >
+      <option value="">-- Pilih Departemen --</option>
+    </select>
+  </div>
 
-  <button type="submit">Update</button>
+  <div class="col-12">
+    <button type="submit" class="btn btn-warning">Update</button>
+  </div>
 </form>
