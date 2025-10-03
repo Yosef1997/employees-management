@@ -4,6 +4,7 @@ app.controller(
     $scope,
     $routeParams,
     $location,
+    $timeout,
     EmployeeService,
     DepartmentService
   ) {
@@ -23,14 +24,15 @@ app.controller(
     function showAlert(message, type) {
       $scope.alert.message = message
       $scope.alert.type = type
-      setTimeout(() => {
-        $scope.$apply(() => ($scope.alert.message = ''))
+      $timeout(function () {
+        $scope.alert.message = ''
       }, 3000)
     }
 
     $scope.loadEmployees = function (page = 1) {
       $scope.loading = true
       $scope.pagination.page = page
+      console.log('Loading start:', $scope.loading)
       EmployeeService.getAll(page, $scope.pagination.limit, $scope.searchText)
         .then(function (res) {
           $scope.employees = res.data.data
@@ -44,6 +46,7 @@ app.controller(
         })
         .finally(function () {
           $scope.loading = false
+          console.log('Loading end:', $scope.loading)
         })
     }
 
@@ -62,9 +65,17 @@ app.controller(
     }
 
     if ($routeParams.id) {
-      EmployeeService.getById($routeParams.id).then(function (res) {
-        $scope.employee = res.data
-      })
+      $scope.loading = true
+      EmployeeService.getById($routeParams.id)
+        .then(function (res) {
+          $scope.employee = res.data
+        })
+        .catch(function (err) {
+          showAlert('Data karyawan tidak ditemukan', 'error')
+        })
+        .finally(function () {
+          $scope.loading = false
+        })
     }
 
     $scope.addEmployee = function () {
