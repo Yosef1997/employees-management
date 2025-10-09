@@ -84,7 +84,7 @@ class Employee {
       VALUES (@name, @position, @salary, @departmentId)
     `)
 
-    return result.recordset[0] // return row baru
+    return result.recordset[0]
   }
   static async create({ name, position, salary, departmentId }) {
     const pool = await poolPromise

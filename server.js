@@ -9,7 +9,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// API Routes
 app.use('/api/v1/employees', auth, employeeRoutes)
 app.use('/api/v1/departments', auth, departmentRoutes)
 app.use((err, req, res, next) => {
